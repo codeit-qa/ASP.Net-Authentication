@@ -2,7 +2,10 @@ using ASPNet_Authentication.Models;
 using ASPNet_Authentication.Services;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace ASPNet_Authentication.Controllers
 {
@@ -47,19 +50,33 @@ namespace ASPNet_Authentication.Controllers
 
         }
 
+        [HttpGet , Authorize]
+        public ActionResult<string> GetMe()
+        {
+            
+            return Ok("asdasdasd");
+
+            //var userName = User?.Identity?.Name;
+            //var userName2 = User.FindFirstValue(ClaimTypes.Name);
+            //var role = User.FindFirstValue(ClaimTypes.Role);
+            //return Ok(new { userName, userName2, role });
+        }
+
         [HttpPost("signin")]
         public ActionResult<User> login(User user)
         {
             try
             {
                 var userData = service.GetUser(user.Email, user.Password);
+                var token = CreateToken(user);
                 if (userData != null)
                 {   
                     
                     return StatusCode(200, new
                     {
                         status = true,
-                        message = "User logged in successfully",
+                        token = token,
+                        ExpiresIn = 3600
                     });
                 }
                 else
@@ -86,7 +103,6 @@ namespace ASPNet_Authentication.Controllers
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.Name),
                 new Claim(ClaimTypes.Email, user.Email),
             };
 
