@@ -41,3 +41,12 @@
 /Users/muhammadqazi/Desktop/ASPNet_Authentication/bin/Debug/net6.0/runtimes/linux/native/libmongocrypt.so
 /Users/muhammadqazi/Desktop/ASPNet_Authentication/bin/Debug/net6.0/runtimes/osx/native/libmongocrypt.dylib
 /Users/muhammadqazi/Desktop/ASPNet_Authentication/bin/Debug/net6.0/runtimes/win/native/mongocrypt.dll
+/Users/muhammadqazi/Desktop/ASPNet_Authentication/bin/Debug/net6.0/System.Security.Permissions.dll
+/Users/muhammadqazi/Desktop/ASPNet_Authentication/bin/Debug/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/muhammadqazi/Desktop/ASPNet_Authentication/bin/Debug/net6.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/muhammadqazi/Desktop/ASPNet_Authentication/bin/Debug/net6.0/Microsoft.IdentityModel.Logging.dll
+/Users/muhammadqazi/Desktop/ASPNet_Authentication/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.dll
+/Users/muhammadqazi/Desktop/ASPNet_Authentication/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/muhammadqazi/Desktop/ASPNet_Authentication/bin/Debug/net6.0/Microsoft.IdentityModel.Tokens.dll
+/Users/muhammadqazi/Desktop/ASPNet_Authentication/bin/Debug/net6.0/System.IdentityModel.Tokens.Jwt.dll
+/Users/muhammadqazi/Desktop/ASPNet_Authentication/bin/Debug/net6.0/BCrypt.Net-Next.dll
