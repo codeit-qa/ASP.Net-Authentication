@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/muhammadqazi/Desktop/ASPNet_Authentication/ASPNet_Authentication.csproj": {}
+    "/Users/muhammadqazi/Documents/Backend/ASPNet_Authentication/ASPNet_Authentication.csproj": {}
   },
   "projects": {
-    "/Users/muhammadqazi/Desktop/ASPNet_Authentication/ASPNet_Authentication.csproj": {
+    "/Users/muhammadqazi/Documents/Backend/ASPNet_Authentication/ASPNet_Authentication.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/muhammadqazi/Desktop/ASPNet_Authentication/ASPNet_Authentication.csproj",
+        "projectUniqueName": "/Users/muhammadqazi/Documents/Backend/ASPNet_Authentication/ASPNet_Authentication.csproj",
         "projectName": "ASPNet_Authentication",
-        "projectPath": "/Users/muhammadqazi/Desktop/ASPNet_Authentication/ASPNet_Authentication.csproj",
+        "projectPath": "/Users/muhammadqazi/Documents/Backend/ASPNet_Authentication/ASPNet_Authentication.csproj",
         "packagesPath": "/Users/muhammadqazi/.nuget/packages/",
-        "outputPath": "/Users/muhammadqazi/Desktop/ASPNet_Authentication/obj/",
+        "outputPath": "/Users/muhammadqazi/Documents/Backend/ASPNet_Authentication/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/muhammadqazi/.nuget/NuGet/NuGet.Config"
