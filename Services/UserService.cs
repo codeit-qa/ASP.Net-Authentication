@@ -8,8 +8,10 @@ namespace ASPNet_Authentication.Services
     {
         public static User user = new User();
         public static Codes code = new Codes();
+        public static ForgptPass forgptPass = new ForgptPass();
         private readonly IMongoCollection<User> users;
         private readonly IMongoCollection<Codes> codes;
+        private readonly IMongoCollection<ForgptPass> fgPass;
 
         public UserService(IConfiguration configuration)
         {
@@ -20,6 +22,8 @@ namespace ASPNet_Authentication.Services
             users = database.GetCollection<User>("Users");
 
             codes = database.GetCollection<Codes>("Codes");
+
+            fgPass = database.GetCollection<ForgptPass>("ForgotPass");
         }
 
         public User GetUser(string email, string password)
@@ -36,11 +40,80 @@ namespace ASPNet_Authentication.Services
             }
             return null;
         }
-        // public User GetUser(string email, string passwword) => users.Find<User>(
-        //     user =>
-        //         user.Email == email &&
-        //         user.Password == passwword)
-        //         .FirstOrDefault();
+
+        public bool findUser(string email)
+        {
+            var user = users.Find(u => u.Email == email).FirstOrDefault();
+
+            if (user == null)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public void forgotPassword(string code, string token, string email)
+        {
+            forgptPass.Code = code;
+            forgptPass.token = token;
+            forgptPass.Email = email;
+            fgPass.InsertOne(forgptPass);
+        }
+
+        public ForgptPass verifyResetCode(string token, string code)
+        {
+            var fgPassData = fgPass.Find(u => u.token == token).FirstOrDefault();
+
+            if (fgPassData == null)
+            {
+                return null;
+            }
+            if (fgPassData.Code == code)
+            {
+                return fgPassData;
+            }
+            return null;
+        }
+
+        public bool resetPassword(string token, string pass)
+        {
+            forgptPass.token = token;
+
+            try
+            {
+
+                var fgPassData = fgPass.Find(u => u.token == forgptPass.token).FirstOrDefault();
+
+                if (fgPassData != null)
+                {
+                    try
+                    {
+
+                        var user = users.Find(u => u.Email == fgPassData.Email).FirstOrDefault();
+
+                        //update password
+                        user.Password = BC.HashPassword(pass);
+
+                        users.ReplaceOne(u => u.Email == user.Email, user);
+
+                        return true;
+
+
+                    }
+                    catch
+                    {
+                        return false;
+                    }
+
+                }
+            }
+            catch
+            {
+                return false;
+            }
+
+            return false;
+        }
 
         public User CreateUser(User request)
         {

@@ -34,7 +34,7 @@ namespace ASPNet_Authentication.Controllers
             try
             {
                 service.CreateUser(user);
-                // sendEmail(code);
+                // sendEmail(code , user.Email);
                 service.codeAdd(code, user.Email);
                 return StatusCode(200, new
                 {
@@ -58,6 +58,8 @@ namespace ASPNet_Authentication.Controllers
         [HttpPost("verify_email"), Authorize]
         public ActionResult<Codes> verifyEmail(Codes code)
         {
+            var me = Request.Headers["Authorization"].ToString();
+
             try
             {
                 var codeData = service.GetCode(code.Code, code.Email);
@@ -129,6 +131,137 @@ namespace ASPNet_Authentication.Controllers
             }
         }
 
+        [HttpPost("forgot_password")]
+        public ActionResult<User> forgotPassword(User user)
+        {
+            try
+            {
+                var responseDB = service.findUser(user.Email);
+
+                if (responseDB)
+                {
+                    var code = codeGenerator();
+                    var token = createToken(user);
+
+                    try
+                    {
+                        service.forgotPassword(code, token, user.Email);
+                        // sendEmail(code, user.Email);
+                        return StatusCode(200, new
+                        {
+                            status = true,
+                            message = "Reset code has been send to your email",
+                            token = token
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        return StatusCode(500, new
+                        {
+                            status = false,
+                            message = ex.Message
+                        });
+                    }
+
+                }
+                else
+                {
+                    return StatusCode(401, new
+                    {
+                        status = false,
+                        message = "Email not found"
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    status = false,
+                    message = ex.Message
+                });
+            }
+
+
+        }
+
+        [HttpPost("verify_code"), Authorize]
+        public ActionResult<ForgptPass> verifyCode(Codes code)
+        {
+            var head = Request.Headers["Authorization"].ToString();
+
+            try
+            {
+                var res = service.verifyResetCode(head.Remove(0, 7), code.Code);
+
+                if (res != null)
+                {
+
+                    return StatusCode(200, new
+                    {
+                        status = true,
+                        message = "Code verified"
+                    });
+                }
+                else
+                {
+                    return StatusCode(401, new
+                    {
+                        status = false,
+                        message = "Invalid code"
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    status = false,
+                    message = ex.Message
+                });
+            }
+
+        }
+
+        [HttpPost("new_password"), Authorize]
+
+        public ActionResult<NewPassword> newPassword(NewPassword pass)
+        {
+            var head = Request.Headers["Authorization"].ToString();
+
+            if (pass.Password == pass.Confirm)
+            {
+                try
+                {
+                    service.resetPassword(head.Remove(0, 7), pass.Password);
+
+                    return StatusCode(200, new
+                    {
+                        status = true,
+                        message = "Password changed"
+                    });
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(500, new
+                    {
+                        status = false,
+                        message = ex.Message
+                    });
+                }
+            }
+            else
+            {
+                return StatusCode(400, new
+                {
+                    status = false,
+                    message = "Password not match"
+                });
+            }
+
+
+        }
+
         private string createToken(User user)
         {
             List<Claim> claims = new List<Claim>
@@ -151,9 +284,9 @@ namespace ASPNet_Authentication.Controllers
             return jwt;
         }
 
-        private void sendEmail(string code)
+        private void sendEmail(string code, string email)
         {
-            string to = "to"; //To address    
+            string to = email; //To address    
             string from = "from"; //From address    
             MailMessage message = new MailMessage(from, to);
 
