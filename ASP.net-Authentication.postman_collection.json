@@ -1,0 +1,171 @@
+{
+	"info": {
+		"_postman_id": "d8de5776-437a-41e7-ab30-705a124eab8e",
+		"name": "ASP.net-Authentication",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Signup",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Signin",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiTXVoYW1tYWQiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJwcmluY2VtdWhhbW1hZDc3N0BnbWFpbC5jb20iLCJleHAiOjE2NDYwNjIyNjB9.aGZF2W3jVH7UzH334qUW2qbdFKan9-X67yWt_YJhzOTvkmZM53FHjoe_uZ4nV_Qmyf9GmCc-nTdFcR5oXuc67g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\" : \"princemuhammad777@gmail.com\",\n    \"password\" : \"0123456789\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7219/api/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7219",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Email-Verify",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Forgot Password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\" : \"princemuhammad777@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7219/api/forgot_password",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7219",
+					"path": [
+						"api",
+						"forgot_password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Code Verification",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJwcmluY2VtdWhhbW1hZDc3N0BnbWFpbC5jb20iLCJleHAiOjE2NDYyOTE5NzZ9.NKjCnBYx82MtmsCh6xKQ3jSgYENaNrigPrHd-VwC9BI1yQ798ucbN27LzyE5ST4uruDeom0pLzwEQ8quarTaGA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"code\" : \"512452\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7219/api/verify_code",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7219",
+					"path": [
+						"api",
+						"verify_code"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Password",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJwcmluY2VtdWhhbW1hZDc3N0BnbWFpbC5jb20iLCJleHAiOjE2NDYyOTMyOTZ9.9FDisRdzcxVF9rb1AXYftH29KSbr-DTzzqNcAdDuUA4QIPcqd4RDhCOGC2eYaTpHPVR4Big5kypgmPqgWXnogQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\" : \"123\",\n    \"confirm\" : \"123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7219/api/new_password",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7219",
+					"path": [
+						"api",
+						"new_password"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
